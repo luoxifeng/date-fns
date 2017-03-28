@@ -1,5 +1,6 @@
 import buildDistanceInWordsLocale from './buildDistanceInWordsLocale/index.js'
 import buildFormatLocale from './buildFormatLocale/index.js'
+import {getTranslation} from './translations/index.js'
 
 /**
  * @type {Locale}
@@ -8,7 +9,8 @@ import buildFormatLocale from './buildFormatLocale/index.js'
  */
 const ruLocale = {
   distanceInWords: buildDistanceInWordsLocale(),
-  format: buildFormatLocale()
+  format: buildFormatLocale(),
+  getTranslation: getTranslation
 }
 
 export default ruLocale

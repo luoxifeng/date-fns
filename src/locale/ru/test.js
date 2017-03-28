@@ -2,14 +2,18 @@
 /* eslint-env mocha */
 
 import assert from 'power-assert'
-import ruLocale from '.'
+var locale = require('./')
 
 describe('ru locale', function () {
   it('exports distanceInWords object', function () {
-    assert(typeof ruLocale.distanceInWords === 'object')
+    assert(typeof locale.distanceInWords === 'object')
   })
 
   it('exports format object', function () {
-    assert(typeof ruLocale.format === 'object')
+    assert(typeof locale.format === 'object')
+  })
+
+  it('exports getTranslation method', function () {
+    assert(typeof locale.getTranslation === 'function')
   })
 })
