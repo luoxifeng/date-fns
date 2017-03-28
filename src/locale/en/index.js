@@ -1,6 +1,7 @@
 import buildDistanceInWordsLocale from './buildDistanceInWordsLocale/index.js'
 import buildFormatLocale from './buildFormatLocale/index.js'
 import buildParseLocale from './buildParseLocale/index.js'
+import {getTranslation} from './translations/index.js'
 
 /**
  * @type {Locale}
@@ -10,7 +11,8 @@ import buildParseLocale from './buildParseLocale/index.js'
 const enLocale = {
   distanceInWords: buildDistanceInWordsLocale(),
   format: buildFormatLocale(),
-  parse: buildParseLocale()
+  parse: buildParseLocale(),
+  getTranslation: getTranslation
 }
 
 export default enLocale

@@ -1,42 +1,36 @@
 import buildTokensRegExp from '../../_lib/buildTokensRegExp/index.js'
+import {getTranslation} from '../translations/index.js'
 
 export default function buildFormatLocale () {
-  var months3char = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'aug', 'sep', 'okt', 'nov', 'dec']
-  var monthsFull = ['januari', 'februari', 'mars', 'april', 'maj', 'juni', 'juli', 'augusti', 'september', 'oktober', 'november', 'december']
-  var weekdays2char = ['sö', 'må', 'ti', 'on', 'to', 'fr', 'lö']
-  var weekdays3char = ['sön', 'mån', 'tis', 'ons', 'tor', 'fre', 'lör']
-  var weekdaysFull = ['söndag', 'måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lördag']
-  var meridiemFull = ['f.m.', 'e.m.']
-
   var formatters = {
     // Month: Jan, Feb, ..., Dec
     'MMM': function (date) {
-      return months3char[date.getUTCMonth()]
+      return getTranslation('MMM', date.getUTCMonth())
     },
 
     // Month: January, February, ..., December
     'MMMM': function (date) {
-      return monthsFull[date.getUTCMonth()]
+      return getTranslation('MMMM', date.getUTCMonth())
     },
 
     // Day of week: Su, Mo, ..., Sa
     'dd': function (date) {
-      return weekdays2char[date.getUTCDay()]
+      return getTranslation('dd', date.getUTCDay())
     },
 
     // Day of week: Sun, Mon, ..., Sat
     'ddd': function (date) {
-      return weekdays3char[date.getUTCDay()]
+      return getTranslation('ddd', date.getUTCDay())
     },
 
     // Day of week: Sunday, Monday, ..., Saturday
     'dddd': function (date) {
-      return weekdaysFull[date.getUTCDay()]
+      return getTranslation('dddd', date.getUTCDay())
     },
 
     // a.m., p.m.
     'aa': function (date) {
-      return (date.getUTCHours() / 12) >= 1 ? meridiemFull[1] : meridiemFull[0]
+      return (date.getUTCHours() / 12) >= 1 ? getTranslation('aa', 1) : getTranslation('', 0)
     }
   }
 

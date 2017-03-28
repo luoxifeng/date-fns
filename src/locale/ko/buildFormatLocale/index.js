@@ -1,54 +1,46 @@
 import buildTokensRegExp from '../../_lib/buildTokensRegExp/index.js'
+import {getTranslation} from '../translations/index.js'
 
 export default function buildFormatLocale () {
-  var months3char = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
-  var monthsFull = ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월']
-  var weekdays2char = ['일', '월', '화', '수', '목', '금', '토']
-  var weekdays3char = ['일', '월', '화', '수', '목', '금', '토']
-  var weekdaysFull = ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일']
-  var meridiemUppercase = ['오전', '오후']
-  var meridiemLowercase = ['오전', '오후']
-  var meridiemFull = ['오전', '오후']
-
   var formatters = {
     // Month: Jan, Feb, ..., Dec
     'MMM': function (date) {
-      return months3char[date.getUTCMonth()]
+      return getTranslation('MMM', date.getUTCMonth())
     },
 
     // Month: January, February, ..., December
     'MMMM': function (date) {
-      return monthsFull[date.getUTCMonth()]
+      return getTranslation('MMMM', date.getUTCMonth())
     },
 
     // Day of week: Su, Mo, ..., Sa
     'dd': function (date) {
-      return weekdays2char[date.getUTCDay()]
+      return getTranslation('dd', date.getUTCDay())
     },
 
     // Day of week: Sun, Mon, ..., Sat
     'ddd': function (date) {
-      return weekdays3char[date.getUTCDay()]
+      return getTranslation('ddd', date.getUTCDay())
     },
 
     // Day of week: Sunday, Monday, ..., Saturday
     'dddd': function (date) {
-      return weekdaysFull[date.getUTCDay()]
+      return getTranslation('dddd', date.getUTCDay())
     },
 
     // AM, PM
     'A': function (date) {
-      return (date.getUTCHours() / 12) >= 1 ? meridiemUppercase[1] : meridiemUppercase[0]
+      return (date.getUTCHours() / 12) >= 1 ? getTranslation('A', 1) : getTranslation('', 0)
     },
 
     // am, pm
     'a': function (date) {
-      return (date.getUTCHours() / 12) >= 1 ? meridiemLowercase[1] : meridiemLowercase[0]
+      return (date.getUTCHours() / 12) >= 1 ? getTranslation('a', 1) : getTranslation('', 0)
     },
 
     // a.m., p.m.
     'aa': function (date) {
-      return (date.getUTCHours() / 12) >= 1 ? meridiemFull[1] : meridiemFull[0]
+      return (date.getUTCHours() / 12) >= 1 ? getTranslation('aa', 1) : getTranslation('', 0)
     }
   }
 

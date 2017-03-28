@@ -1,52 +1,44 @@
 import buildTokensRegExp from '../../_lib/buildTokensRegExp/index.js'
+import {getTranslation} from '../translations/index.js'
 
 export default function buildFormatLocale () {
-  // http://new.gramota.ru/spravka/buro/search-answer?s=242637
-  var monthsShort = ['янв.', 'фев.', 'март', 'апр.', 'май', 'июнь', 'июль', 'авг.', 'сент.', 'окт.', 'нояб.', 'дек.']
-  var monthsFull = ['январь', 'февраль', 'март', 'апрель', 'май', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь']
-  var monthsGenitive = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
-  var weekdays2char = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб']
-  var weekdays3char = ['вск', 'пнд', 'втр', 'срд', 'чтв', 'птн', 'суб']
-  var weekdaysFull = ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота']
-  var meridiem = ['ночи', 'утра', 'дня', 'вечера']
-
   var formatters = {
     // Month: янв., фев., ..., дек.
     'MMM': function (date) {
-      return monthsShort[date.getUTCMonth()]
+      return getTranslation('MMM', date.getUTCMonth())
     },
 
     // Month: январь, февраль, ..., декабрь
     'MMMM': function (date) {
-      return monthsFull[date.getUTCMonth()]
+      return getTranslation('MMMM', date.getUTCMonth())
     },
 
     // Day of week: вс, пн, ..., сб
     'dd': function (date) {
-      return weekdays2char[date.getUTCDay()]
+      return getTranslation('dd', date.getUTCDay())
     },
 
     // Day of week: вск, пнд, ..., суб
     'ddd': function (date) {
-      return weekdays3char[date.getUTCDay()]
+      return getTranslation('ddd', date.getUTCDay())
     },
 
     // Day of week: воскресенье, понедельник, ..., суббота
     'dddd': function (date) {
-      return weekdaysFull[date.getUTCDay()]
+      return getTranslation('dddd', date.getUTCDay())
     },
 
     // Time of day: ночи, утра, дня, вечера
     'A': function (date) {
       var hours = date.getUTCHours()
       if (hours >= 17) {
-        return meridiem[3]
+        return getTranslation('A', 3)
       } else if (hours >= 12) {
-        return meridiem[2]
+        return getTranslation('A', 2)
       } else if (hours >= 4) {
-        return meridiem[1]
+        return getTranslation('A', 1)
       } else {
-        return meridiem[0]
+        return getTranslation('A', 0)
       }
     },
 
@@ -76,7 +68,7 @@ export default function buildFormatLocale () {
   monthsGenitiveFormatters.forEach(function (formatterToken) {
     formatters[formatterToken + ' MMMM'] = function (date, commonFormatters) {
       var formatter = formatters[formatterToken] || commonFormatters[formatterToken]
-      return formatter(date, commonFormatters) + ' ' + monthsGenitive[date.getUTCMonth()]
+      return formatter(date, commonFormatters) + ' ' + getTranslation('MMMM', date.getUTCMonth(), {casing: 'genitive'})
     }
   })
 
